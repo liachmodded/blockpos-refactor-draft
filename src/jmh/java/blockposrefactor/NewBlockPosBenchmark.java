@@ -6,7 +6,7 @@ public class NewBlockPosBenchmark {
 
     @Benchmark
     public void work() {
-        NewBlockPos newPos = NewBlockPos.ORIGIN.mutableCopy();
+        ((NewBlockPos) new ImmutableNewBlockPos(1, 1, 1)).mutableCopy();
     }
 
 }

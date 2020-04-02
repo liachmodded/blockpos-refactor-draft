@@ -7,7 +7,7 @@ public class OldBlockPosBenchmark {
 
     @Benchmark
     public void work() {
-        BlockPos pos = BlockPos.ORIGIN.mutableCopy();
+        new BlockPos(1, 1, 1).mutableCopy();
     }
 
 }
