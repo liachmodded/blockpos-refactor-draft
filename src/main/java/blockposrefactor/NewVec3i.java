@@ -10,9 +10,9 @@ import net.minecraft.util.math.Position;
 public class NewVec3i implements Comparable<NewVec3i> {
 
     public static final NewVec3i ZERO = new NewVec3i(0, 0, 0);
-    private int x;
-    private int y;
-    private int z;
+    protected final int x;
+    protected final int y;
+    protected final int z;
 
     public NewVec3i(int x, int y, int z) {
         this.x = x;
@@ -57,24 +57,12 @@ public class NewVec3i implements Comparable<NewVec3i> {
         return this.x;
     }
 
-    protected void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return this.y;
     }
 
-    protected void setY(int y) {
-        this.y = y;
-    }
-
     public int getZ() {
         return this.z;
-    }
-
-    protected void setZ(int z) {
-        this.z = z;
     }
 
     public NewVec3i down() {
