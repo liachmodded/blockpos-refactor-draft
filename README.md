@@ -44,6 +44,8 @@ Since mutable block positions are mutable, they should not implement `Comparable
 ## Perf concern
 By switching `BlockPos` to interface, a few method invocations will become `invokeinterface` than `invokevirtual` as before.
 
-Even though there will be `invokeinterface` bytecode instructions, hotspot can optimize it easily as in most cases there is only two impls of `BlockPos`: `ImmutableBlockPos` and `MutableBlockPos`. As the game runs, hotspot can gradually optimize the method calls, and the performance difference will be little over time. 
+Even though there will be `invokeinterface` bytecode instructions, hotspot can optimize it easily as in most cases there is only two impls of `BlockPos`: `ImmutableBlockPos` and `MutableBlockPos`. As the game runs, hotspot can gradually optimize the method calls, and the performance difference will be little over time.
 
-You can try by running the `User` test main class. In the first run the `invokeinterface` (new arrangement) is almost always slower, but for the other runs, the result varies. (To compile the test, you need to grab fabric example mod, set mc version to 20w13b and mapping to 20w13b+build.7, and paste all these classes to the default package in the main source set)
+If you want to improve the performance of those defaulted inteface methods, you can override them in the two implementations instead (replace `getX` calls with field access/`toImmutable()` with `this` in immutable subclass)
+
+To run jms benchmarks, edit the benchmarks in the `jmh` source set and execute `./gradlew jmh` for a result. The exemplary results of the current setup is available at [#1](https://github.com/liachmodded/blockpos-refactor-draft/issues/1)
